@@ -4,7 +4,7 @@ import styles from './Card.module.scss'
 interface Props {
     prop: CardDTO
 }
-// 1234
+// 1234  99999
 function Card({ prop }: Props) {
     return (
         <div className={styles.card}>
