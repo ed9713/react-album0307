@@ -18,7 +18,21 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
-    "noUncheckedSideEffectImports": true
+    "noUncheckedSideEffectImports": true,
+
+    "baseUrl": ".",
+    "paths": {
+      "@/*":["src/*"],
+      "@assets/*":["src/assets/*"],
+      "@components/*":["src/components/*"],
+      "@pages/*":["src/pages*"],
+      "@types/*":["src/types*"],
+      "@recoil/*":["src/recoil/*"],
+      "@apis/*":["src/apis/*"],
+    },
+    "noImplicitAny": false,
+    "strictNullChecks": false,
+    
   },
   "include": ["vite.config.ts"]
 }
