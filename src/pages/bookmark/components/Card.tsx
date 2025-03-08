@@ -5,6 +5,7 @@ interface Props {
     prop: CardDTO
 }
 
+// abcd 
 
 function Card({ prop }: Props) {
     return (
