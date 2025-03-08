@@ -5,6 +5,7 @@ interface Props {
     prop: CardDTO
 }
 
+
 function Card({ prop }: Props) {
     return (
         <div className={styles.card}>
