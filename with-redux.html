@@ -1,0 +1,113 @@
+<html>
+    <head>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/redux/4.0.1/redux.js" ></script>
+    </head>
+    <body>
+        
+        <style>
+            .container{
+                border:5px solid #00000;
+                padding : 10px;
+            }
+        </style>
+
+        <div id="red"></div>
+        <div id="blue"></div>
+        <div id="green"></div>
+        <script>
+
+            //========================================================================
+            /*
+                store 생성 
+            */
+            // reducer 설정
+            // state = 이전의 state 
+            function reducer( state , action){
+
+                console.log(state , action );
+
+                if(state === undefined){
+                    return {color:'yellow'};
+                }
+
+                // 복제 
+                let newState = Object.assign({}, state , {color: action.color});
+
+                if( action.type === 'CHANGE_COLOR'  ){
+                    newState.color = action.color;
+                }               
+                
+                console.log(action.type , action , state , newState );
+                return newState ;
+            }
+
+            // storer 생성 
+            let store = Redux.createStore(
+                    reducer,
+                    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+            );
+            // console.log(store.getState());
+
+            //========================================================================     
+
+
+            // red 함수 
+            function red(){
+                let state = store.getState();
+                let a =  `
+                    <div class="container" id="component_red" style="background-color:${state.color}">
+                        <h1>red</h1>
+                        <input type ="button" value="fire"  onclick="
+                            store.dispatch({type:'CHANGE_COLOR' , color:'red'});                     
+                        " />
+                    </div>
+                `;
+
+                document.querySelector('#red').innerHTML = a;
+            }
+
+            store.subscribe(red);       // store.subscribe 등록  
+            red();
+
+
+            // blue 함수 
+            function blue(){
+                let state = store.getState();
+                let a =  `
+                    <div class="container" id="component_blue" style="background-color:${state.color}">
+                        <h1>blue</h1>
+                        <input type ="button" value="fire"  onclick="
+                            store.dispatch({type:'CHANGE_COLOR' , color:'blue'});                     
+                        " />
+                    </div>
+                `;
+
+                document.querySelector('#blue').innerHTML = a;
+            }
+
+            store.subscribe(blue);       // store.subscribe 등록  
+            blue();
+
+            
+            // green 함수 
+            function green(){
+                let state = store.getState();
+                let a =  `
+                    <div class="container" id="component_green" style="background-color:${state.color}">
+                        <h1>green</h1>
+                        <input type ="button" value="fire"  onclick="
+                            store.dispatch({type:'CHANGE_COLOR' , color:'green'});                     
+                        " />
+                    </div>
+                `;
+
+                document.querySelector('#green').innerHTML = a;
+            }
+
+            store.subscribe(green);       // store.subscribe 등록  
+            green();
+
+
+        </script>
+    </body>
+</html>

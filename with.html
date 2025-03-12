@@ -1,0 +1,209 @@
+<html>
+    
+    <head>
+        <meta charset="UTF-8" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/redux/4.0.1/redux.js" ></script>
+
+    </head>
+    <body>
+
+        <!-- heade -->
+        <div id="subject">ddd</div>
+        <div id="TOC">ddd</div>
+        <div id="control">ddd</div>
+        <div id="article">ddd</div>
+
+    </body>
+
+
+    <script>
+
+        // header
+        function subject(){
+            let content = `
+                <header>
+                    <h1>WEB</h1>
+                    hello, web!
+                </header>               
+            `;
+            document.querySelector("#subject").innerHTML = content;
+        }
+
+        // TOC 
+        function TOC(){
+            console.log("TOC");
+            let state = store.getState();
+            let contentList = state.content;
+            let str = "";
+
+            contentList.map((item, index)=>{
+                str += `<li><a href='${index+1}.html' onclick="
+                        event.preventDefault();
+                        var action = {type:'SELECT' , id : ${item.id}}
+                        store.dispatch(action);
+                    "
+                    >${item.title}</a></li>`;
+            });
+
+            let content = `
+                <nav>
+                    <ol>
+                        ${str}
+                    </ol>
+                </nav>             
+            `;
+            document.querySelector("#TOC").innerHTML = content;            
+        }
+
+        // control 
+        function control(){
+            let content = `
+                <ul>
+                    <li><a href='/create' onclick="
+                            event.preventDefault();
+                            var action = {type:'CHANGE_MODE'}
+                            store.dispatch(action);
+                        ">create</a></li>
+                    <li><button onclick="
+
+                        let state = store.getState();
+                        let selected_id = state.selected_id ;
+                        if( selected_id  ){
+                            if(confirm('삭제?')){
+                                var action = { type : 'DELETE' , id : selected_id };
+                                store.dispatch(action);
+                            }
+                        }                        
+                        ">delete</button></li>
+                </ul>           
+            `;
+            document.querySelector("#control").innerHTML = content;            
+        }
+
+        // article 
+        function article(){
+
+            console.log("article");
+            let state = store.getState();
+            let index = state.content.findIndex(( item )=>  item.id == state.selected_id );
+
+            let title = "HTML";
+            let desc = "HTML is...";
+            let content = "";
+
+            if( state.mode === "create" ){
+
+                content = `
+                <article>
+                <h2>Create</h2>
+                <form action="/create" method="post" 
+                    onSubmit="
+                        event.preventDefault();
+                        // console.log( event.target.title.value , event.target.desc.value  );
+                        // this.props.onSubmit( event.target.title.value , e.target.desc.value );
+                        var action = {type:'CREATE' , title : event.target.title.value , desc : event.target.desc.value }
+                        store.dispatch(action);
+                        
+                    "
+                >
+                    <p><input type="text" name="title" placeholder="title"></input></p>
+                    <p><textarea name="desc" placeholder="desc"></textarea></p>
+                    <p><input type="submit"></input></p>
+                </form>
+                </article>
+                `;         
+
+            }else if( state.mode === "read" ){
+                if( index >= 0  ){
+                    title = state.content[index].title;
+                    desc = state.content[index].desc;
+                }
+
+                content = `
+                    <article>
+                        <h2>${title}</h2>
+                        ${desc}
+                    </article>        
+                `;
+            }else{
+                content = `
+                    <article>
+                        <h2>${title}</h2>
+                        ${desc}
+                    </article>        
+                `;                
+            }
+
+
+            document.querySelector("#article").innerHTML = content;            
+        }        
+
+        //=========================================
+        // redux store 관련 
+        function reducer( state , action ){
+
+            let newState ; 
+
+            // console.log(state , action);
+            if( state === undefined ){
+                return {
+                    mode : 'read',      // read, create (화면)
+                    selected_id : null ,
+                    selected_id_max : 3,
+                    content: [
+                        { id: 1, title: "html33", desc: "설명입니다. " },
+                        { id: 2, title: "css44", desc: "설명입니다.222 " },
+                        { id: 3, title: "javascript55", desc: "설명입니다.3333 " },
+                    ]
+                }
+            }else if( action.type === 'SELECT' ){
+                newState = Object.assign({}, state , {selected_id : action.id , mode : 'read'});
+            }else if( action.type === 'CHANGE_MODE' ){
+                newState = Object.assign({}, state  , { mode : 'create' });      
+            }else if( action.type === 'CREATE' ){
+                // newState = Object.assign({}, state  , { mode : 'create' });        
+                var newContent =  state.content.concat();
+                var newContentId = state.selected_id_max + 1;
+                newContent.push({ id : newContentId , title : action.title , desc : action.desc });
+                newState = Object.assign({}, state ,
+                     { content : newContent , selected_id_max : newContentId , selected_id : newContentId , mode : 'read' });
+            }else if( action.type === 'DELETE' ){         
+
+                let index = state.content.findIndex(( item )=>  item.id == action.id );
+                let newContent = state.content.concat();
+                if( index > -1 ){
+                    newContent.splice( index , 1);
+                    console.log(newContent);
+
+                    newState = Object.assign({}, state ,
+                        { content : newContent , selected_id : null , mode : 'welcome' });
+                }
+            }
+
+
+            if( newState !== state ){
+                console.log('변경 ');
+                return newState ;
+            }
+        }
+
+        // store 선언 
+        let store = Redux.createStore(
+                    reducer,
+                    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+        );
+        
+        // subscript 
+        store.subscribe(TOC);
+        store.subscribe(article);
+        //=========================================
+
+
+        // 화면  모양 만들기
+        subject();
+        TOC();
+        control();
+        article();
+
+    </script>    
+</html>
