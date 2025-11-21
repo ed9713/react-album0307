@@ -19,9 +19,10 @@ export default function index() {
   // 8시 33분 테스트
   // 9시 14분 테스트 -  ed9713
   // 9시 57분 테스트 -  edstyle7 - 이클립스
-  // 10시44분 테스트 -  edstyle7 - 이클립스
-  
-  
+  // 10시44분 테스트 -  edstyle7 - 이클립스  
+  // 9시 18분 테스트 -  vs 코드 
+
+
   const imgSelector = useRecoilValueLoadable(imageData);
   // const imgSelector = useRecoilValue(imageData);
   const [imgData, setImgData] = useState<CardDTO>();
