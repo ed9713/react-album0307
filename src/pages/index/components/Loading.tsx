@@ -1,5 +1,8 @@
 import styles from './Loading.module.scss'
 
+
+// 12시 40분 테스트 -  edstyle7 - 이클립스   - 브랜치     
+
 export default function Loading() {
   return (
     <div>
