@@ -2,6 +2,8 @@ import { CardDTO } from '../types/card';
 import styles from './Card.module.scss'
 
 
+ // 12시 39분 테스트 -  vs 코드 - ed9713
+
 interface Props {
   data : CardDTO;
   handleDialog: (eventValue:boolean) => void;
