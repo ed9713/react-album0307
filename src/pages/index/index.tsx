@@ -26,7 +26,7 @@ export default function index() {
   // 11시 29분 테스트 -  edstyle7 - 이클립스   - 브랜치  
   // 11시 34분 테스트 -  ed9713 - vs   - 브랜치    
   // 11시 41분 테스트 -  edstyle7 - 이클립스   - 브랜치  
-  
+  // 12시 23분 테스트 -  edstyle7 - 이클립스   - 브랜치    
 
 
   const imgSelector = useRecoilValueLoadable(imageData);
