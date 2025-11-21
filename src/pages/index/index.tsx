@@ -24,14 +24,11 @@ export default function index() {
   // 11시 09분 테스트 -  vs 코드 - ed9713
   // 11시 11분 테스트 -  edstyle7 - 이클립스   - 브랜치 
   // 11시 29분 테스트 -  edstyle7 - 이클립스   - 브랜치  
-<<<<<<< HEAD
+  // 11시 34분 테스트 -  ed9713 - vs   - 브랜치    
   // 11시 41분 테스트 -  edstyle7 - 이클립스   - 브랜치  
   
-  
-=======
-  // 11시 34분 테스트 -  ed9713 - vs   - 브랜치  
 
->>>>>>> origin/branch_vs_1133
+
   const imgSelector = useRecoilValueLoadable(imageData);
   // const imgSelector = useRecoilValue(imageData);
   const [imgData, setImgData] = useState<CardDTO>();
