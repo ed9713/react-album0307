@@ -16,6 +16,8 @@ import Loading from './components/Loading'
 
 export default function index() {
 
+  // 8시 33분 테스트
+
   const imgSelector = useRecoilValueLoadable(imageData);
   // const imgSelector = useRecoilValue(imageData);
   const [imgData, setImgData] = useState<CardDTO>();
