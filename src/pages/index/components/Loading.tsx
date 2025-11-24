@@ -16,6 +16,8 @@ import styles from './Loading.module.scss'
 // 9시 37분 테스트 -  edstyle7 - 이클립스   - 브랜치 test_1124
 // 9시 44분 테스트 -  edstyle7 - 이클립스   - 브랜치 test_1124
 // 10시 9분 테스트 -  edstyle7 - 이클립스   - 브랜치 test_1214
+// 10시 58분 테스트 -  edstyle7 - 이클립스   - 브랜치 test_1124_1058
+
 
 export default function Loading() {
   return (
