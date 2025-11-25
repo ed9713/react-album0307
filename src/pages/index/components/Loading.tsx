@@ -30,7 +30,7 @@ import styles from './Loading.module.scss'
 // 12시 19분 테스트 -  edstyle7 - 이클립스   - 브랜치 test_1124_1122 
 // 12:26 분 테스트 -  edstyle7 - 이클립스   - 브랜치 test_1124_1114
 // 11:52 분 테스트 -  edstyle7 - 이클립스   - 브랜치 feat_1125_1511
-
+// 12:02 분 테스트 -  edstyle7 - 이클립스   - 브랜치 feat_1125_1511
 
 export default function Loading() {
   return (
